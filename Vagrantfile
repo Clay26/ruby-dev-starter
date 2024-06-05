@@ -1,6 +1,10 @@
 # We want to use version '2' of Vagrant's configuration language
 Vagrant.configure("2") do |config|
   
+  # Define the Ruby and Rails versions as variables
+  RUBY_VERSION = "3.1.3"
+  RAILS_VERSION = "7.0.4"
+  
   # This is the operating system to use, in this case Ubuntu Linux
   config.vm.box = "ubuntu/jammy64"
   
@@ -14,4 +18,17 @@ Vagrant.configure("2") do |config|
   
   # This will mount your current directory on your computer to the directory /files_on_your_computer inside the virtual machine
   config.vm.synced_folder ".", "/files_on_your_computer"
+  
+  # Provision the VM by running the necessary commands
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo apt-get update
+    sudo apt-get install -y build-essential git libsqlite3-dev redis ruby-dev tzdata
+    sudo apt install -y rbenv
+    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+    echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+    source ~/.bashrc
+    rbenv install #{RUBY_VERSION}
+    rbenv global #{RUBY_VERSION}
+    gem install rails -v #{RAILS_VERSION} --no-document
+  SHELL
 end
