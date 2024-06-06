@@ -24,9 +24,9 @@ Vagrant.configure("2") do |config|
     sudo apt-get update
     sudo apt-get install -y build-essential git libsqlite3-dev redis ruby-dev tzdata
     sudo apt install -y rbenv
-    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
     echo 'eval "$(rbenv init -)"' >> ~/.bashrc
     source ~/.bashrc
+    git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
     rbenv install #{RUBY_VERSION}
     rbenv global #{RUBY_VERSION}
     gem install rails -v #{RAILS_VERSION} --no-document
