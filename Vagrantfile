@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   
   # Define the Ruby and Rails versions as variables
   RUBY_VERSION = "3.1.3"
-  RAILS_VERSION = "7.0.4"
+  RAILS_VERSION = "7.1.3"
   
   # This is the operating system to use, in this case Ubuntu Linux
   config.vm.box = "ubuntu/jammy64"
@@ -24,6 +24,7 @@ Vagrant.configure("2") do |config|
     sudo apt-get update
     sudo apt-get install -y build-essential git libsqlite3-dev redis ruby-dev tzdata
     sudo apt install -y rbenv
+    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
     echo 'eval "$(rbenv init -)"' >> ~/.bashrc
     source ~/.bashrc
     git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
