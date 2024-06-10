@@ -21,7 +21,7 @@ wait_for_success "sudo apt-get update"
 
 # Install required packages
 echo "Installing required packages..."
-wait_for_success "sudo apt-get install -y build-essential git libsqlite3-dev redis ruby-dev tzdata"
+wait_for_success "sudo apt-get install -y build-essential git libsqlite3-dev redis ruby-dev tzdata sqlite3"
 
 # Install rbenv
 echo "Installing rbenv..."
